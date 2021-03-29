@@ -628,10 +628,60 @@ ingresos en la franja de 40 a 49 años. Aunque para un estudio en mayor
 profundidad sería aconsejable el calcular el porcentaje de ingresos por
 franja de edad. Este dato nos dará datos empíricos más fiables.
 
-## Procesos de análisis visuales del juego de datos
+En cuanto a la variable education, si examinamos los valores que toma,
+podemos ver que podemos segmentarla en tres grupos. Para ello nos
+ayudamos de la variable education.num que contiene la ordenación del
+factor.
 
-Primeramente vamos a visualizar las correlaciones entre las diferentes
-variables.
+```{r}
+totalData[, c('education', 'education.num')] %>% unique() %>% arrange(education.num)
+```
+
+La segmentación la realizaremos según el siguiente criterio:
+
+-   Estudios básicos: 10th, 11th, 12th, 1st-4th, 5th-6th, 7th-8th, 9th,
+    Preschool.
+
+-   Estudios médios: HS-grad, Some-college, Assoc-voc, Assoc-acdm.
+
+-   Estudios superiores: Doctorate, Masters, Prof-school, Bachelors.
+
+    ```{r}
+
+    education_group_labels <- c('basic', 'middle', 'higher')
+    totalData$education_group <- cut(totalData$education.num, c(0, 8, 12, 16), labels= education_group_labels)
+    totalData[, c('education', 'education.num', 'education_group')] %>% unique() %>% arrange(education.num) %>% print()
+    ```
+
+### Procesos de análisis visuales del juego de datos
+
+Vamos a relacionar las relaciones entre clase de trabajo (workclass) e
+ingresos
+
+```{r}
+ggplot(data=totalData,aes(x=workclass,fill=income))+geom_bar()+ coord_flip()
+```
+
+La clase Private, es claramente representativa de la serie, y es en
+donde se da la mayoría de ingresos superiores a los 50k.
+
+```{r}
+ggplot(data=totalData,aes(x=education_group,fill=income))+geom_bar()
+```
+
+Vemos que la proporción de personas con estudios superiores que ganan
+por encima de los 50k es de aproximadamente la mitad. En cambio, para
+las personas con estudios medios se ve una gran desproporción. Vamos a
+mirar dentro del grupo de estudios medios si destaca alguna clase sobre
+otra.
+
+```{r}
+middle_education <- totalData[totalData$education_group == 'middle', c('education', 'income')]
+ggplot(data=middle_education,aes(x=education,fill=income))+geom_bar()
+```
+
+Ninguna clase es representativa destacando ligeramente los que han
+acabado estudios de High scool.
 
 ------------------------------------------------------------------------
 
