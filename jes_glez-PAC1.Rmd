@@ -551,7 +551,7 @@ summary(totalData)
 > De la primera observación de las estadísticas básicas podemos hacer
 > mención de los siguientes puntos significativos:
 >
-> -   **edad**: Esta variable se encuentraligeramente desbalanceada
+> -   **edad**: Esta variable se encuentra ligeramente desbalanceada
 >     hacia valores de mayor edad, mostrándose la media escorada hacia
 >     la derecha respecto a la mediana. Además si nos fijamos en el
 >     valor máximo respecto al tercer cuartil, podemos sospechar de la
@@ -604,6 +604,8 @@ anteriormente que alguna variable los tiene ya codificados.
 
 ### **Preprocesamiento de las variables**
 
+##### Variable edad
+
 Para la variable continua edad vamos a discretizarla por intervalos.
 
 ```{r}
@@ -627,6 +629,8 @@ franja de edades comprendidas entre los 30 y 49 años, existiendo mayores
 ingresos en la franja de 40 a 49 años. Aunque para un estudio en mayor
 profundidad sería aconsejable el calcular el porcentaje de ingresos por
 franja de edad. Este dato nos dará datos empíricos más fiables.
+
+##### Variable education
 
 En cuanto a la variable education, si examinamos los valores que toma,
 podemos ver que podemos segmentarla en tres grupos. Para ello nos
@@ -652,6 +656,27 @@ La segmentación la realizaremos según el siguiente criterio:
     totalData$education_group <- cut(totalData$education.num, c(0, 8, 12, 16), labels= education_group_labels)
     totalData[, c('education', 'education.num', 'education_group')] %>% unique() %>% arrange(education.num) %>% print()
     ```
+
+##### Variable workclass
+
+En esta variable nos encontramos con que se ha asignado el carácter "?"
+para los valores desconocidos. Para mejorar la interpretabilidad de los
+resultados, vamos a cambiar por "desconocido".
+
+```{r}
+workclass_levels <- levels(totalData$workclass)
+workclass_levels
+```
+
+Si nos fijamos, los nombres vienen con un espacio inicial que
+aprovecharemos para corregir.
+
+```{r}
+workclass_levels <- trimws(workclass_levels)
+workclass_levels[1] <- 'Desconocido'
+levels(totalData$workclass) <- workclass_levels
+levels(totalData$workclass)
+```
 
 ### Procesos de análisis visuales del juego de datos
 
