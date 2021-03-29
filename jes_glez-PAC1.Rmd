@@ -497,11 +497,64 @@ de minería respecto a otros proyectos indícalo.
 > tendrá la suficiente antelación como para poder actuar antes de que la
 > fotografía registrada esté caducada.
 >
-> Complementado la información recibida con otros orígenes de datos,
-> tales como los metereológicos, o el de incidencias de tráfico, puede
-> permitir dar un mejor servicio a la hora
+> Como complemento a la información recibida se consultan otras fuentes
+> de datos:
+>
+> -   Incidencias de tráfico de España. Base de datos que recoge las
+>     incidencias de tráfico en el estado. Se puede consultar en:
+>     <https://opendata.esri.es/datasets/a64659151f0a42c69a38563e9d006c6b_0>
+>
+>     El acceso se realiza atacando a la API que devolverá un documento
+>     JSON. En el propio portal hay un generador de url en función de
+>     los campos que se necesiten.
+>
+> -   Datos de afectación metereológica. En especial interesan las
+>     previsiones de fenómenos atmosféricos adversos que puedan ocurrir
+>     en la red nacional de carreteras. Más información:
+>     <http://www.aemet.es/es/datos_abiertos/AEMET_OpenData>
+>
+>     El acceso es también por API REST, siendo necesario la obtención
+>     de una Key de identificación.
+>
+> En cuanto a la calidad del dato, al ser fuentes abiertas vienen con
+> una calidad del dato alta.
 >
 > ### Data Preparation
+>
+> De todos los campos que ofrece la API de la DGT, sólo interesan los
+> siguientes:
+>
+> autonomia, carretera, causa, fechahora\_, hacia, nivel, pk_final,
+> pk_inicial, poblacion, provincia, sentido, tipo, actualizad, x, y.
+>
+> Este es un ejemplo de dato devuelto por el API
+>
+>      {
+>              "attributes": {
+>                 "autonomia": "CASTILLA-LEON",
+>                 "carretera": "CL-505",
+>                 "causa": "NIEBLA",
+>                 "fechahora_": "2021-02-03 17:02",
+>                 "hacia": "Ambos",
+>                 "nivel": "VERDE",
+>                 "pk_final": 42.9,
+>                 "pk_inicial": 13,
+>                 "poblacion": "HERRADON (EL)",
+>                 "provincia": "AVILA",
+>                 "sentido": "Ambos sentidos",
+>                 "tipo": "METEOROLOGICA",
+>                 "x": 40.6099478,
+>                 "y": -4.5569102,
+>                 "actualizad": "2021-02-05 14:30"
+>
+> Para los datos metereológicos utilizaremos en una primera fase inicial
+> la parte de avisos. El formato de la petición se puede consultar en la
+> siguiente dirección:
+> <https://opendata.aemet.es/dist/index.html?#/avisos_cap>. La petición
+> devuelve un XML con cada una de las alertas. A continuación se muestra
+> un ejemplo de un extracto del documento
+>
+> ![](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-5B110911.png)
 >
 > ### Modeling
 >
