@@ -423,11 +423,16 @@ de minería respecto a otros proyectos indícalo.
 > concentraciones. Hoy en día nos encontramos con un elemento que cambia
 > totalmente el paradigma de como se estaban realizando esta serie de
 > estudios hasta el momento. Nos referimos a la incorporación del
-> teléfono móbil como parte inseparable del ciudadano.
+> teléfono móvil como parte inseparable del ciudadano. El uso de
+> dispositivos móviles por parte de la población trae pareja la
+> comunicación con las torres de telefonía. Éstas son capaces de ubicar
+> con relativa exactitud la posición dentro de una celda de comunicación
+> mediante triangulación, permitiendo la recopilación de datos de manera
+> constante y en tiempo real.
 >
-> El objetivo de este proyecto está en poder identificar grupos de
-> personas con diferentes características para poder ofrecer una
-> información publicitaria, más directa y acorde con sus necesidades.
+> Dentro de los objetivos de este proyecto se encuentra el poder
+> identificar los movimientos de tráfico con el fin de poder planificar
+> y actuar con la suficiente anticipación ante el colapso circulatorio.
 >
 > Este proyecto está inspirado en el estudio sobre movilidad realizado
 > por el INE a raíz de la pandemia de COVID-19. Dicho estudio se puede
@@ -435,6 +440,74 @@ de minería respecto a otros proyectos indícalo.
 > <https://www.ine.es/covid/covid_movilidad.htm>
 >
 > ### Identificación del las fases del proyecto
+>
+> Utilizando la metodología crisp-dm para el desarrollo de proyectos de
+> minería de datos, exploraremos las diferentes fases del proyecto a
+> alto nivel, sin entrar a definir las tareas que surgirían dentro de
+> cada fase. Esta metodología puede ser consultada en el siguiente
+> documento: <https://www.the-modeling-agency.com/crisp-dm.pdf>, y
+> consta de seis fases que se van realizando cíclicamente. Por otro
+> lado, si en una de las fases se detectasen carencias, se permite la
+> realimentación hacia fases previas para poder solucionarlas.
+>
+> {Introducir dibujo de las fases}
+>
+> ### Business Understanding
+>
+> Tal y como se ha planteado en la introducción del proyecto, la
+> posibilidad que nos ofrece hoy en día la tecnología de poder rastrear
+> el movimiento de las personas, genera un flujo de información
+> aprovechable a nivel empresarial. No obstante, nos encontramos con la
+> dificultad de explotar esta información individualmente debido a las
+> restricciones impuestas por las leyes de protección de datos que
+> impera en toda la Unión Europea.
+>
+> ### Data Understanding
+>
+> Los datos iniciales serán proporcionados por los operadores de
+> telefonía. Estas empresas cuentan con nuestros datos personales, así
+> como los datos de nuestro terminal, unida a la información del rastro
+> de desplazamiento. No obstante, para cumplir con la legislación actual
+> en materia de privacidad, esta información a de ser anonimizada
+> mediante un procedimiento que impida dentro del contexto tecnológico
+> actual la asociación de un determinado dato con un sujeto determinado
+> (ver <https://www.aepd.es/es/documento/2008-0283.pdf>).
+>
+> Si nos fijamos en el set de datos que se preparó para el INE a raíz
+> del estudio de movilidad por ámbito geográfico durante el estado de
+> alarma por COVID-19, las operadoras generan tres ficheros diarios de
+> tipo csv como origen de datos (ver
+> <https://www.ine.es/covid/datos_disponibles.zip>):
+>
+> -   **PobxCeldasOrigen_DDMMM**. Fichero con la descripción de la
+>     celda, la población en donde está ubicada, el número de personas
+>     residentes, el número de personas que se han desplazado, y
+>     porcentajes sobre el total.
+>
+> -   **PobxCeldasDestino_DDMMM**. Fichero con una estructura similar al
+>     anterior, en donde se registra el movimiento entrante en la
+>     población registrado por la celda.
+>
+> -   **Flujos_DDMMM**. Fichero que contempla el flujo entre las
+>     diferentes celdas.
+>
+> Aunque estos datos estáticos nos sirven como ejemplo de datos, para
+> que el proyecto tenga sentido la ventana temporal de entrega del flujo
+> tiene que ser en tiempo "quasi" real. Solamente de esta manera se
+> tendrá la suficiente antelación como para poder actuar antes de que la
+> fotografía registrada esté caducada.
+>
+> Complementado la información recibida con otros orígenes de datos,
+> tales como los metereológicos, o el de incidencias de tráfico, puede
+> permitir dar un mejor servicio a la hora
+>
+> ### Data Preparation
+>
+> ### Modeling
+>
+> ### Evaluation
+>
+> ### Deployment
 
 <https://www.sngular.com/es/data-science-crisp-dm-metodologia/>
 
