@@ -3,6 +3,9 @@ title: 'Minería de datos: PEC1'
 author: "Autor: Jesús González Leal"
 date: "marzo 2021"
 output:
+  pdf_document:
+    highlight: zenburn
+    toc: yes
   html_document:
     highlight: default
     number_sections: yes
@@ -11,9 +14,6 @@ output:
     toc_depth: 2
     includes:
       in_header: 75.584-PEC-header.html
-  pdf_document:
-    highlight: zenburn
-    toc: yes
   word_document: default
 editor_options: 
   markdown: 
@@ -430,9 +430,13 @@ de minería respecto a otros proyectos indícalo.
 > mediante triangulación, permitiendo la recopilación de datos de manera
 > constante y en tiempo real.
 >
-> Dentro de los objetivos de este proyecto se encuentra el poder
-> identificar los movimientos de tráfico con el fin de poder planificar
-> y actuar con la suficiente anticipación ante el colapso circulatorio.
+> Dentro de los objetivos de este proyecto se encuentra el tener un
+> modelo que basado en los movimientos del tráfico, pueda predecir la
+> saturación de las vías de tráfico con el fin de poder planificar y
+> actuar con la suficiente anticipación ante diferentes escenarios, como
+> son obras en la red de carreteras, movimientos masivos de la
+> población, e incidencias medioambientales que pudieran derivar en un
+> colapso circulatorio.
 >
 > Este proyecto está inspirado en el estudio sobre movilidad realizado
 > por el INE a raíz de la pandemia de COVID-19. Dicho estudio se puede
@@ -441,7 +445,7 @@ de minería respecto a otros proyectos indícalo.
 >
 > ### Identificación del las fases del proyecto
 >
-> Utilizando la metodología crisp-dm para el desarrollo de proyectos de
+> Utilizando la metodología CRISP-DM para el desarrollo de proyectos de
 > minería de datos, exploraremos las diferentes fases del proyecto a
 > alto nivel, sin entrar a definir las tareas que surgirían dentro de
 > cada fase. Esta metodología puede ser consultada en el siguiente
@@ -450,14 +454,18 @@ de minería respecto a otros proyectos indícalo.
 > lado, si en una de las fases se detectasen carencias, se permite la
 > realimentación hacia fases previas para poder solucionarlas.
 >
-> {Introducir dibujo de las fases}
+> [![Extraído del documento crisp-dm 1.0 pag.
+> 12](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-17BA4160.png "Fases del modelo CRISP-DM")](https://www.the-modeling-agency.com/crisp-dm.pdf)
 >
 > ### Business Understanding
 >
 > La primera fase del modelo CRISPM-DM comienza con la comprensión del
-> negocio y de los objetivos principales del proyecto. En esta fase se
-> realiza un plan preliminar necesario para alcanzar el resultado
-> esperado.
+> negocio y de los **objetivos principales del proyecto**. Durante esta
+> fase se realiza un estudio del impacto que tendrá en el negocio, los
+> riesgos y contingencias, y el binomio coste - beneficio que
+> representará. Como entregables a cumplir tenemos el plan de proyecto
+> preliminar necesario para alcanzar el resultado esperado y los
+> objetivos mínimos a cumplir.
 >
 > Tal y como se ha planteado en la introducción del proyecto, la
 > posibilidad que nos ofrece hoy en día la tecnología de poder rastrear
@@ -465,15 +473,44 @@ de minería respecto a otros proyectos indícalo.
 > aprovechable a nivel empresarial. No obstante, nos encontramos con la
 > dificultad de explotar esta información individualmente debido a las
 > restricciones impuestas por las leyes de protección de datos que
-> impera en toda la Unión Europea.
+> impera en toda la Unión Europea. No obstante, para el proyecto que se
+> muestra no es necesario contar con una alta granularidad, interesando
+> ver los flujos de circulación entre poblaciones.
+>
+> Objetivos del negocio: Tener un modelo que permita predecir los flujos
+> del transito entre poblaciones con el fin de poder planificar rutas
+> con total eficacia.
+>
+> Evaluación de la situación: Para el desarrollo del proyecto contamos
+> principalmente con los datos facilitados por las operadoras de
+> telefonía móvil, así como con la información facilitada por la DGT y
+> complementada por la agencia metereológica de españa (AEMET). En una
+> fase posterior del proyecto y vista su viabilidad, se puede utilizar
+> la plataforma de google maps o bien streetopenview para la publicación
+> de los resultados.
+>
+> Será necesario tener en cuenta los **costes de licenciamiento** que
+> pedirán las compañías de telefonía por la explotación de los datos.
+> Para el resto de plataformas contempladas no se contemplan gastos en
+> un inicio. En el caso de la DGT son datos "opendata", y para los datos
+> metereológicos, existe una capa de consumo sin coste que se prevee que
+> pueda dar servicio al proyecto.
+>
+> El retorno de la inversión se obtendrá de la venta del servicio a
+> compañías de transporte. Una vez evaluado el modelo en producción se
+> pueden buscar otros nichos de negocio.
 >
 > ### Data Understanding
 >
-> Esta fase se busca familiarizarse con la compresión de los datos,
-> identificando los problemas de calidad que puedan tener, descubriendo
-> información oculta o subconjunto interesantes de datos.
+> Esta fase se busca familiarizarse con la comprensión de los datos,
+> identificando los problemas de calidad que puedan tener y descubriendo
+> información oculta o los subconjunto interesante de datos a tratar que
+> permitan tener una visión desde diferentes perspectivas. Un punto
+> importante será verificar la calidad de los datos para definir las
+> estrategias necesarias para abordarlos. Al finalizar esta fase ya
+> podremos tener un **modelo conceptual** de los datos.
 >
-> Los datos iniciales serán proporcionados por los operadores de
+> Los **datos iniciales** serán proporcionados por los operadores de
 > telefonía. Estas empresas cuentan con nuestros datos personales, así
 > como los datos de nuestro terminal, unida a la información del rastro
 > de desplazamiento. No obstante, para cumplir con la legislación actual
@@ -500,16 +537,16 @@ de minería respecto a otros proyectos indícalo.
 > -   **Flujos_DDMMM**. Fichero que contempla el flujo entre las
 >     diferentes celdas.
 >
-> Aunque estos datos estáticos nos sirven como ejemplo de datos, para
+> Aunque estos datos estáticos nos sirven como ejemplo de datos, [para
 > que el proyecto tenga sentido la ventana temporal de entrega del flujo
-> tiene que ser en tiempo "quasi" real. Solamente de esta manera se
-> tendrá la suficiente antelación como para poder actuar antes de que la
-> fotografía registrada esté caducada.
+> tiene que ser en tiempo "quasi" real]{.ul}. Solamente de esta manera
+> se tendrá la suficiente antelación como para poder actuar antes de que
+> la fotografía registrada esté caducada.
 >
 > Como complemento a la información recibida se consultan otras fuentes
 > de datos:
 >
-> -   Incidencias de tráfico de España. Base de datos que recoge las
+> -   **Incidencias de tráfico de España**. Base de datos que recoge las
 >     incidencias de tráfico en el estado. Se puede consultar en:
 >     <https://opendata.esri.es/datasets/a64659151f0a42c69a38563e9d006c6b_0>
 >
@@ -517,7 +554,7 @@ de minería respecto a otros proyectos indícalo.
 >     JSON. En el propio portal hay un generador de url en función de
 >     los campos que se necesiten.
 >
-> -   Datos de afectación metereológica. En especial interesan las
+> -   **Datos de afectación metereológica**. En especial interesan las
 >     previsiones de fenómenos atmosféricos adversos que puedan ocurrir
 >     en la red nacional de carreteras. Más información:
 >     <http://www.aemet.es/es/datos_abiertos/AEMET_OpenData>
@@ -525,8 +562,10 @@ de minería respecto a otros proyectos indícalo.
 >     El acceso es también por API REST, siendo necesario la obtención
 >     de una Key de identificación.
 >
-> En cuanto a la calidad del dato, al ser fuentes abiertas vienen con
-> una calidad del dato alta.
+> En cuanto a la **calidad del dato**, al ser fuentes abiertas vienen
+> con una calidad del dato alta. Se ha de tener en cuenta la
+> desnormalización de los datos, tanto en el caso de los datos de la DGT
+> como los de la AEMET.
 >
 > ### Data Preparation
 >
@@ -535,13 +574,43 @@ de minería respecto a otros proyectos indícalo.
 > tablas, registros y atributos necesarios. Además, se realizará la
 > limpieza y el formateo del dato en caso necesario. Por otro lado, se
 > buscan los campos principales para realizar la integración de los
-> datos.
+> datos. Al finalizar esta fase ya tendríamos definido un **modelo
+> lógico de datos**.
+>
+> Para los datos provenientes de las operadoras de telefonía, y según
+> los ficheros de ejemplo, encontramos la siguiente estructura:
+>
+> PobxCeldasOrigen
+>
+> ![](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-367F390D.png)
+>
+> PobxCeldasDestino
+>
+> ![](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-707BCC32.png)
+>
+> Flujos
+>
+> ![](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-27D2FB4A.png)
+>
+> La fecha está contenida en el directorio con el siguiente formato:
+> "DIA_01ABR_2020"
+>
+> No obstante, se tendrá que trabajar con la operadora para que
+> suministren esta información mediante API.
+>
+> De la visualización de las tablas, podemos descubrir las siguientes
+> dimensiones:
+>
+> -   **Poblaciones**. Con la lista de poblaciones de origen y destino.
+>
+> El campo celda puede despreciarse en un inicio, dado que para el
+> resultado final no aporta, quedando sólo para comprobación de errores.
 >
 > De todos los campos que ofrece la API de la DGT, sólo interesan los
 > siguientes:
 >
-> autonomia, carretera, causa, fechahora\_, hacia, nivel, pk_final,
-> pk_inicial, poblacion, provincia, sentido, tipo, actualizad, x, y.
+> -   autonomia, carretera, causa, fechahora\_, hacia, nivel, pk_final,
+>     pk_inicial, poblacion, provincia, sentido, tipo, actualizad, x, y.
 >
 > Este es un ejemplo de dato devuelto por el API
 >
@@ -563,6 +632,21 @@ de minería respecto a otros proyectos indícalo.
 >                 "y": -4.5569102,
 >                 "actualizad": "2021-02-05 14:30"
 >
+> Como se puede comprobar, los datos vienen desnormalizados, por lo que
+> será necesario una normalización. Para ello se proponen las siguientes
+> dimensiones:
+>
+> -   **Jerarquía Geográfica**. Con las dimensiones:
+>
+>     -   **Pais**, **Autonomía**, **Provincia**, **Población**.
+>
+> -   **Carreteras**. Con la nomenclatura de carreteras estatales.
+>
+> -   **Gravedad**. Incorpora el Atributo nivel junto con su descripción
+>     para definir a la alerta.
+>
+> -   **TipoEvento**. Lista de causas que causan las incidencias.
+>
 > Para los datos metereológicos utilizaremos en una primera fase inicial
 > la parte de avisos. El formato de la petición se puede consultar en la
 > siguiente dirección:
@@ -572,24 +656,56 @@ de minería respecto a otros proyectos indícalo.
 >
 > ![](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-5B110911.png)
 >
+> Como se puede comprobar en la captura, los datos también se encuentran
+> desnormalizados, por los que definen las siguientes dimensiones:
+>
+> -   **Población**. Con la lista de poblaciones afectadas
+>
+> -   **TipoEvento.** Listado de eventos metereológicos. Atributo
+>     "event".
+>
+> -   **Gravedad**. Atributo "Severity".
+>
+> Como se puede comprobar, se intenta que las dimensiones sean
+> conformadas en todos los modelos con el fin de ir a un modelo único de
+> datos. Por otro lado, el resto de atributos enriquecen la tabla de
+> hechos con la transacción. Es especialmente interesante ver que en el
+> caso de la DGT contamos con las coordenadas geoespaciales, interesante
+> de cara a la presentación en mapa. No es así en el caso de la AEMET.
+>
 > ### Modeling
 >
 > Esta fase se aplican las técnicas de modelado necesarias para
 > conseguir un modelo de datos óptimo. Tal y como se muestra en el
 > diagrama de fases, es una fase que suele volver sobre la fase de
-> preparación de datos.
+> preparación de datos, bien para solucionar problemas, o para
+> enriquecer los datos. Además de la construcción de los modelos, será
+> necesaria el diseño de los test que se utilizarán para evaluar los
+> modelos.
 >
 > ### Evaluation
 >
 > Una vez obtenido los modelos necesarios para conseguir los objetivos
 > establecidos en la fase inicial, es necesaria una evaluación que
-> permita asegurar que se cumplen dichos objetivos.
+> permita asegurar que se cumplen dichos objetivos. Para ello se emplea
+> el plan de test diseñado durante la fase anterior. En caso necesario
+> se revisa el proceso y en función de los resultados se determinan los
+> próximos pasos a cumplir.
 >
 > ### Deployment
 >
-> La creación de un modelo final no es el final de proyecto, más bien
-> supone el llegar a un hito dentro de él. De aquí que el CRISP-DM se
-> muestre como un conjunto de actividades recursivas.
+> Una vez el modelo ha pasado todos los test y tiene la aprobación, es
+> necesario definir un plan para su despliegue. Así, la creación de un
+> modelo final no es el final de proyecto, más bien supone el llegar a
+> un hito dentro de él. Un modelo puesto en producción necesita de una
+> monitorización y de un mantenimiento. Además, es recomendable la
+> publicación de resultados que ayuden a entender si se ha logrado
+> conseguir los objetivos inicialmente pedidos en la fase 1. Es bastante
+> común que tras la puesta en producción del proyecto se generen nuevas
+> espectativas que haga replantearse el modelo (proyecto) generado. Es
+> por ello, que CRISP-DM describe el ciclo de vida del proyecto de
+> minería de datos en en entorno circular, en donde la salida realimenta
+> la entrada de un nuevo ciclo que busca la mejora continua del negocio.
 
 <https://www.sngular.com/es/data-science-crisp-dm-metodologia/>
 
@@ -713,10 +829,13 @@ Antes de cualquier análisis, vamos a comprobar que no existan valores
 nulos en el dataset.
 
 ```{r}
-if(nrow(totalData) != nrow(unique(totalData))) {print('Existen registros duplicados en el dataset')} else {print('Dataset sin registros duplicados')}
+duplicated_row_number <- nrow(totalData) - nrow(unique(totalData))
+if(duplicated_row_number != 0) {print(paste('Existen registros duplicados en el dataset: ', duplicated_row_number, 'registros.'))} else {print('Dataset sin registros duplicados')}
 
 totalData <- unique(totalData)
 ```
+
+Se ha limpiado el dataset de registros duplicados.
 
 ### **Análisis Exploratorio**
 
@@ -835,25 +954,51 @@ La segmentación la realizaremos según el siguiente criterio:
     totalData[, c('education', 'education.num', 'education_group')] %>% unique() %>% arrange(education.num) %>% print()
     ```
 
-##### Variable workclass
+##### Eliminación del espacio inicial en los factor.
 
-En esta variable nos encontramos con que se ha asignado el carácter "?"
-para los valores desconocidos. Para mejorar la interpretabilidad de los
-resultados, vamos a cambiar por "desconocido".
+En las variables tipo factor, nos encontramos que hay un espacio inicial
+que debemos de eliminar.
 
 ```{r}
-workclass_levels <- levels(totalData$workclass)
-workclass_levels
+column_name_factor <- c('workclass', 'marital.status', 'occupation', 'relationship', 'race', 'sex', 'native.country')
+
+  for (column_name in column_name_factor) {
+    print(paste('>> Variable: ', column_name, ' sin tratamiento'))
+    print(levels(totalData[,column_name]))
+    levels(totalData[,column_name]) <- trimws(totalData[,column_name])
+    print(paste('>> Variable: ', column_name, ' tratada'))
+    print(levels(totalData[,column_name]))
+    print('------------------------')
+  }
+
+
 ```
 
-Si nos fijamos, los nombres vienen con un espacio inicial que
-aprovecharemos para corregir.
+##### Tratamiento de los valores desconocidos
+
+En este dataset hemos observado que se utiliza el carácter "?" para los
+valores desconocidos en las variables de tipo factor. Para mejorar la
+interpretabilidad de los resultados, vamos a cambiarlo por
+"desconocido".
+
+Por ejemplo, en la variable native.country encontramos este valor.
 
 ```{r}
-workclass_levels <- trimws(workclass_levels)
-workclass_levels[1] <- 'Desconocido'
-levels(totalData$workclass) <- workclass_levels
-levels(totalData$workclass)
+levels(totalData$native.country)
+```
+
+```{r}
+for (column_name in column_name_factor) {
+  pos <- match('?', levels(totalData[,column_name]))
+  if (!is.na(pos)) {
+    levels(totalData[,column_name])[pos] <- 'desconocido' 
+  }
+}
+levels(totalData$native.country)
+```
+
+```{r}
+
 ```
 
 ### Procesos de análisis visuales del juego de datos
