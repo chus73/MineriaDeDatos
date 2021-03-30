@@ -454,6 +454,11 @@ de minería respecto a otros proyectos indícalo.
 >
 > ### Business Understanding
 >
+> La primera fase del modelo CRISPM-DM comienza con la comprensión del
+> negocio y de los objetivos principales del proyecto. En esta fase se
+> realiza un plan preliminar necesario para alcanzar el resultado
+> esperado.
+>
 > Tal y como se ha planteado en la introducción del proyecto, la
 > posibilidad que nos ofrece hoy en día la tecnología de poder rastrear
 > el movimiento de las personas, genera un flujo de información
@@ -463,6 +468,10 @@ de minería respecto a otros proyectos indícalo.
 > impera en toda la Unión Europea.
 >
 > ### Data Understanding
+>
+> Esta fase se busca familiarizarse con la compresión de los datos,
+> identificando los problemas de calidad que puedan tener, descubriendo
+> información oculta o subconjunto interesantes de datos.
 >
 > Los datos iniciales serán proporcionados por los operadores de
 > telefonía. Estas empresas cuentan con nuestros datos personales, así
@@ -521,6 +530,13 @@ de minería respecto a otros proyectos indícalo.
 >
 > ### Data Preparation
 >
+> En este apartado, siguiendo el método CRISP-DM, realizamos las tareas
+> de selección de los datos principales, con el descubrimiento de las
+> tablas, registros y atributos necesarios. Además, se realizará la
+> limpieza y el formateo del dato en caso necesario. Por otro lado, se
+> buscan los campos principales para realizar la integración de los
+> datos.
+>
 > De todos los campos que ofrece la API de la DGT, sólo interesan los
 > siguientes:
 >
@@ -558,9 +574,22 @@ de minería respecto a otros proyectos indícalo.
 >
 > ### Modeling
 >
+> Esta fase se aplican las técnicas de modelado necesarias para
+> conseguir un modelo de datos óptimo. Tal y como se muestra en el
+> diagrama de fases, es una fase que suele volver sobre la fase de
+> preparación de datos.
+>
 > ### Evaluation
 >
+> Una vez obtenido los modelos necesarios para conseguir los objetivos
+> establecidos en la fase inicial, es necesaria una evaluación que
+> permita asegurar que se cumplen dichos objetivos.
+>
 > ### Deployment
+>
+> La creación de un modelo final no es el final de proyecto, más bien
+> supone el llegar a un hito dentro de él. De aquí que el CRISP-DM se
+> muestre como un conjunto de actividades recursivas.
 
 <https://www.sngular.com/es/data-science-crisp-dm-metodologia/>
 
