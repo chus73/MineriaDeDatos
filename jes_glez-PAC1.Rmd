@@ -1064,12 +1064,12 @@ En las variables tipo factor, nos encontramos que hay un espacio inicial
 que debemos de eliminar.
 
 ```{r}
-column_name_factor <- c('workclass', 'marital.status', 'occupation', 'relationship', 'race', 'sex', 'native.country')
+column_name_factor <- c('workclass', 'marital.status', 'occupation', 'relationship', 'race', 'sex', 'native.country', 'income')
 
   for (column_name in column_name_factor) {
     print(paste('>> Variable: ', column_name, ' sin tratamiento'))
     print(levels(totalData[,column_name]))
-    levels(totalData[,column_name]) <- trimws(totalData[,column_name])
+    levels(totalData[,column_name]) <- trimws(levels(totalData[,column_name]))
     print(paste('>> Variable: ', column_name, ' tratada'))
     print(levels(totalData[,column_name]))
     print('------------------------')
@@ -1122,9 +1122,16 @@ table(totalData$migrant)
 ```
 
 Aunque ha crecido la representatividad de los ciudadanos no nacidos en
-Estados Unidos, la diferencia sigue siendo grande.
+Estados Unidos, la diferencia sigue siendo grande. Si lo miramos
+visualmente, la diferencia a
+
+```{r}
+ggplot(totalData) + geom_bar(aes(x= migrant, fill= migrant))
+```
 
 ### Procesos de análisis visuales del juego de datos
+
+#### Visualización variable workclass
 
 Vamos a relacionar las relaciones entre clase de trabajo (workclass) e
 ingresos
@@ -1133,8 +1140,27 @@ ingresos
 ggplot(data=totalData,aes(x=workclass,fill=income))+geom_bar()+ coord_flip()
 ```
 
-La clase Private, es claramente representativa de la serie, y es en
-donde se da la mayoría de ingresos superiores a los 50k.
+**La clase Private**, es claramente representativa de la serie, y es en
+donde se da la mayoría de **ingresos superiores a los 50k**. Además de
+comparar entre clases, vamos ver en donde esta ganancia es más acusada
+dentro de la clase.
+
+```{r}
+total_workclass <- totalData %>% select(workclass, income) %>% group_by(workclass) %>% count()
+workclass_moreThan_50k <- totalData %>% select(workclass, income) %>% filter(income == '>50K') %>% group_by(workclass) %>% count()
+total_workclass_df <- merge(total_workclass, workclass_moreThan_50k, by = 'workclass', all = T)
+colnames(total_workclass_df) <- c('workclass', 'total', '>50k')
+total_workclass_df[is.na(total_workclass_df$`>50k`), '>50k'] <- 0
+total_workclass_ratio <-mutate(total_workclass_df, "ratio"= (`>50k`/total)*100)
+total_workclass_ratio
+```
+
+Vemos que mayor porcentaje de personas con ingresos superiores a los 50
+k se encuentra en los **empleados por cuenta propia**.
+
+#### Visualización variable education
+
+Examinemos ahora las personas con estudios superiores
 
 ```{r}
 ggplot(data=totalData,aes(x=education_group,fill=income))+geom_bar()
@@ -1154,12 +1180,72 @@ ggplot(data=middle_education,aes(x=education,fill=income))+geom_bar()
 Ninguna clase es representativa destacando ligeramente los que han
 acabado estudios de High scool.
 
+#### Visualización educación y país de nacimiento
+
 Involucremos el país de nacimiento en la estadística de la educación
 para ver los resultados
 
 ```{r}
+totalData %>% filter(income == '>50K') %>% select(education_group, migrant) %>% table()
 
 ```
+
+Podemos observar de los resultados de la tabla que la proporción entre
+las personas nacidas fuera de EEUU que consiguen ganar más de 50k es de
+casi el doble para los que tienen estudios superiores. Esta proporción
+no se da entre las personas nacidas en EEUU, en el que se observa una
+proporción similar entre los que han estudiado estudios medios y los que
+tienen superiores. No obstante, no podemos olvidar la desproporción que
+existen entre el número de personas que obtienen estos ingreso dentro de
+la misma clase, estudios medios respecto a superiores, para no obtener
+conclusiones erróneas.
+
+#### Visualización sexo
+
+Primero examinemos los datos de esta variable respecto a los ingresos.
+
+```{r}
+ggplot(data=totalData,aes(x=sex,fill=income))+geom_bar()
+```
+
+Como era de esperar, se observa una gran desproporción entre hombres y
+mujeres que ganan más de 50k. Miremos estos resultados en términos
+relativos
+
+```{r}
+total_sex <- totalData %>% group_by(sex) %>% count()
+total_sex_morethan50k <- totalData %>% filter(income == '>50K') %>% group_by(sex) %>% count()
+total_sex_df <- merge(total_sex, total_sex_morethan50k, by= 'sex', all =T)
+mutate(total_sex_df, ratio= (n.y / n.x)*100)
+```
+
+La proporción entre los hombres que superan los 50k de ingresos respecto
+a las mujeres es de casi el triple.
+
+Miremos si esta relación se relaciona con la raza.
+
+```{r}
+ggplot(data=totalData,aes(x=sex,fill=income))+geom_bar(position="fill") + facet_wrap(~race)
+```
+
+Podemos observar como continúa la desproporción entre mujeres y hombres
+respecto a los ingresos. Por otro lado, aunque la raza blanca es la que
+obtiene la mayor proporción, encontramos como la asiática tiene una
+proporción similar, aunque no olvidemos que el resultado es respecto a
+su propia clase, con una población mucho menor que la blanca o la negra.
+
+Podemos preguntarnos si esto tendrá algo que ver con los estudios.
+
+```{r}
+totalData %>% filter(income == '>50K') %>% select('education_group', 'race') %>% table()
+```
+
+En efecto, vemos que en la población asiática, la proporción entre
+personas que obtienen estos ingresos prevalece la que tiene estudios
+superiores. Sorprende que en el caso de la población negra esto no
+sucede, siendo la que tiene estudios medios la predominante.
+
+### Conclusiones finales
 
 ------------------------------------------------------------------------
 
