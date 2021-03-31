@@ -441,6 +441,7 @@ de minería respecto a otros proyectos indícalo.
 > Este proyecto está inspirado en el estudio sobre movilidad realizado
 > por el INE a raíz de la pandemia de COVID-19. Dicho estudio se puede
 > encontrar en el siguiente enlace:
+>
 > <https://www.ine.es/covid/covid_movilidad.htm>
 >
 > ### Identificación del las fases del proyecto
@@ -448,11 +449,15 @@ de minería respecto a otros proyectos indícalo.
 > Utilizando la metodología **CRISP-DM** para el desarrollo de proyectos
 > de minería de datos, exploraremos las diferentes fases del proyecto a
 > alto nivel, sin entrar a definir las tareas que surgirían dentro de
-> cada fase. Esta metodología puede ser consultada en el siguiente
-> documento: <https://www.the-modeling-agency.com/crisp-dm.pdf>, y
-> consta de seis fases que se van realizando cíclicamente. Por otro
-> lado, si en una de las fases se detectasen carencias, se permite la
-> realimentación hacia fases previas para poder solucionarlas.
+> cada fase.
+>
+> Esta metodología puede ser consultada en el siguiente documento:
+> <https://www.the-modeling-agency.com/crisp-dm.pdf>, y consta de seis
+> fases que se van realizando cíclicamente. Por otro lado, si en una de
+> las fases se detectasen carencias, se permite la realimentación hacia
+> fases previas para poder solucionarlas, tal y como se puede observar
+> en diagrama que se muestra a continuación (*Extraído del documento
+> crisp-dm 1.0 pag. 12, enlace superior*):
 >
 > [![Extraído del documento crisp-dm 1.0 pag.
 > 12](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-17BA4160.png "Fases del modelo CRISP-DM")](https://www.the-modeling-agency.com/crisp-dm.pdf)
@@ -463,9 +468,9 @@ de minería respecto a otros proyectos indícalo.
 > negocio y de los **objetivos principales del proyecto**. Durante esta
 > fase se realiza un estudio del impacto que tendrá en el negocio, los
 > riesgos y contingencias, y el binomio coste - beneficio que
-> representará. Como entregables a cumplir tenemos el plan de proyecto
-> preliminar necesario para alcanzar el resultado esperado y los
-> objetivos mínimos a cumplir.
+> representará. Como entregables a cumplir tenemos **el plan de
+> proyecto** preliminar necesario para alcanzar el resultado esperado y
+> los objetivos mínimos a cumplir.
 >
 > Tal y como se ha planteado en la introducción del proyecto, la
 > posibilidad que nos ofrece hoy en día la tecnología de poder rastrear
@@ -478,7 +483,7 @@ de minería respecto a otros proyectos indícalo.
 > ver los flujos de circulación entre poblaciones.
 >
 > **Objetivos del negocio:** Tener un modelo que permita predecir los
-> flujos del transito entre poblaciones con el fin de poder planificar
+> flujos del transito entre poblaciones, con el fin de poder planificar
 > rutas con total eficacia.
 >
 > **Evaluación de la situación:** Para el desarrollo del proyecto
@@ -503,7 +508,7 @@ de minería respecto a otros proyectos indícalo.
 > Se considerará que el proyecto ha tenido **éxito** si:
 >
 > -   Se consigue predecir las situaciones de riesgo en la red de
->     carreteras estatales en por encima de un 70%.
+>     carreteras estatales por encima de un 70%.
 >
 > -   El proyecto se complementa en plazos y presupuesto.
 >
@@ -519,9 +524,9 @@ de minería respecto a otros proyectos indícalo.
 > +---+------------------------+-----------------+----------------------------------+
 > | 2 | Data Understanding     | 1 semanas       | Informe de recopilación de datos |
 > +---+------------------------+-----------------+----------------------------------+
-> | 3 | Data Preparation       | 3 semana        | modelo lógico                    |
+> | 3 | Data Preparation       | 3 semana        | Modelo lógico                    |
 > +---+------------------------+-----------------+----------------------------------+
-> | 4 | Modeling               | 2 semanas       | modelo físico                    |
+> | 4 | Modeling               | 2 semanas       | Modelo físico                    |
 > |   |                        |                 |                                  |
 > |   |                        |                 | Plan de pruebas                  |
 > +---+------------------------+-----------------+----------------------------------+
@@ -532,23 +537,23 @@ de minería respecto a otros proyectos indícalo.
 >
 > La estimación de tiempos se ha realizado con un escenario optimista,
 > dejando margen para la redacción de la documentación que acompañe al
-> proyecto. En este sentido, se han definido los entregables mínimos que
-> aparecen en la tabla superior.
+> proyecto. En este sentido, se han definido los [entregables
+> mínimos]{.ul} que aparecen en la tabla superior.
 >
 > Los **recursos estimados** mínimos serán la de un jefe de proyecto con
 > experiencia en analítica avanzada y un data scientist para el
 > desarrollo del modelo. La carga del equipo se balanceará y podrá ser
 > modificado en función de las exigencias del proyecto.
 >
-> Se establecen **puntos de control** mínimo con negocio en la
-> finalización de cada fase.
+> Se establecen **puntos de control** con negocio con una periodicidad
+> [mínima]{.ul} a la finalización de cada fase.
 >
 > ### Data Understanding
 >
 > Esta fase se busca familiarizarse con la comprensión de los datos,
 > identificando los problemas de calidad que puedan tener y descubriendo
-> información oculta o los subconjunto interesante de datos a tratar que
-> permitan tener una visión desde diferentes perspectivas. Un punto
+> información oculta o los subconjunto interesante de datos a tratar,
+> que permitan tener una visión desde diferentes perspectivas. Un punto
 > importante será verificar la calidad de los datos para definir las
 > estrategias necesarias para abordarlos. Al finalizar esta fase ya
 > podremos tener un **modelo conceptual** de los datos.
@@ -580,11 +585,11 @@ de minería respecto a otros proyectos indícalo.
 > -   **Flujos_DDMMM**. Fichero que contempla el flujo entre las
 >     diferentes celdas.
 >
-> Aunque estos datos estáticos nos sirven como ejemplo de datos, [para
-> que el proyecto tenga sentido la ventana temporal de entrega del flujo
-> tiene que ser en tiempo "quasi" real]{.ul}. Solamente de esta manera
-> se tendrá la suficiente antelación como para poder actuar antes de que
-> la fotografía registrada esté caducada.
+> Aunque estos datos estáticos nos sirven como ejemplo de datos, para
+> que el proyecto tenga sentido la **ventana temporal de entrega** del
+> flujo tiene que ser en tiempo ["quasi" real]{.ul}. Solamente de esta
+> manera se tendrá la suficiente antelación como para poder actuar antes
+> de que la fotografía registrada esté caducada.
 >
 > Como complemento a la información recibida se consultan otras fuentes
 > de datos:
@@ -961,6 +966,14 @@ summary(totalData)
 > -   **workclass**: Muestra un valor con "?" para valores desconocidos.
 >     Se tendrá que hacer tratamiento de él.
 >
+> -   **fnlwgt**: Si nos fijamos, existe una diferencia muy alta entre
+>     los valores que toma el tercer intercuartil y el valor máximo.
+>     Esto hace que, o bien tengamos que tratarlos como outliers,
+>     eliminándolos o sustituyéndolos por otro valor para arreglar la
+>     descompensación, o bien no tengamos en cuenta esta variable. En
+>     este estudio se a optado por la segunda opción, al no tener muy
+>     claro el propósito de la variable.
+>
 > -   **education** : Predominan los estudiantes de grado ("High
 >     school"). Por el otro lado, encontramos el segundo valor
 >     mayoritario en "Some-college", estudiantes que han interrumpido
@@ -970,12 +983,16 @@ summary(totalData)
 >     variable, es que por su naturaleza, podría interesarnos que
 >     siguiera el orden natural de estudios: "Preschool, 1st-4th,
 >     5th-6th, 7th-8th, 9th, 10th, 11th, 12th, Bachelors, HS-grad,
->     Masters, ..."
+>     Masters, ...". Para esto nos serviremos más adelante de la
+>     variable **education.num**.
 >
 > -   **capital.gain** y **capital.loss**: Si examinamos las medidas de
 >     tendencia central media y mediana, vemos que se encuentran muy
->     distanciados entre ambas. Podríamos pasarlas a categóricas
->     binarias para expresar las pérdidas y ganancias.
+>     distanciados entre ambas. Esto se puede ver también si miramos los
+>     valores máximos y los comparamos con el tercer intercuartil.
+>     Podríamos pasarlas a categóricas binarias para expresar las
+>     pérdidas y ganancias. No obstante, se ha decidido prescindir de
+>     ellas para este estudio.
 >
 > -   **Sex** y **race**: Examinando estas dos variables, nos damos
 >     cuenta del enorme sesgo que nos encontramos en los datos, tanto en
@@ -987,7 +1004,8 @@ summary(totalData)
 > -   **native.country**: Debido a la enorme desproporción entre
 >     ciudadanos norteamericanos y el resto, se propone la agrupación en
 >     dos grupos, nortamericanos y extranjeros, con el fin de equilibrar
->     la variable.
+>     la variable. Vemos además que presenta el carácter "?" para los
+>     valores desconocidos.
 >
 > -   **Income**: La variable destino muestra también un desbalanceo
 >     entre las muestras que son menores de 50k respecto las que superan
@@ -1166,11 +1184,13 @@ Examinemos ahora las personas con estudios superiores
 ggplot(data=totalData,aes(x=education_group,fill=income))+geom_bar()
 ```
 
-Vemos que la proporción de personas con estudios superiores que ganan
-por encima de los 50k es de aproximadamente la mitad. En cambio, para
-las personas con estudios medios se ve una gran desproporción. Vamos a
-mirar dentro del grupo de estudios medios si destaca alguna clase sobre
-otra.
+En el gráfico superior podemos observar que la proporción de personas
+con estudios superiores que ganan por encima de los 50k es de
+aproximadamente la mitad. En cambio, para las personas con estudios
+medios se ve una gran desproporción.
+
+Vamos a mirar dentro del grupo de estudios medios si destaca alguna
+clase sobre otra.
 
 ```{r}
 middle_education <- totalData[totalData$education_group == 'middle', c('education', 'income')]
@@ -1224,13 +1244,13 @@ a las mujeres es de casi el triple.
 
 #### Análisis sexo respecto raza
 
-Miremos si esta relación se relaciona con la raza.
+Ampliaremos el análisis añadiendo la variable race al estudio.
 
 ```{r}
 ggplot(data=totalData,aes(x=sex,fill=income))+geom_bar(position="fill") + facet_wrap(~race)
 ```
 
-Podemos observar como continúa la desproporción entre mujeres y hombres
+Se observa como continúa la desproporción entre mujeres y hombres
 respecto a los ingresos. Por otro lado, aunque la raza blanca es la que
 obtiene la mayor proporción, encontramos como la asiática tiene una
 proporción similar, aunque no olvidemos que el resultado es respecto a
@@ -1244,10 +1264,10 @@ Podemos preguntarnos si esto tendrá algo que ver con los estudios.
 totalData %>% filter(income == '>50K') %>% select('education_group', 'race') %>% table()
 ```
 
-En efecto, vemos que en la población asiática, la proporción entre
-personas que obtienen estos ingresos prevalece la que tiene estudios
-superiores. Sorprende que en el caso de la población negra esto no
-sucede, siendo la que tiene estudios medios la predominante.
+En efecto, vemos que en la **población asiática**, la proporción entre
+personas que obtienen estos ingresos prevalece la que tiene **estudios
+superiores**. Sorprende que en el caso de la **población negra** esto
+**no sucede**, siendo la que tiene estudios medios la predominante.
 
 #### Análisis horas a la semana
 
@@ -1258,8 +1278,9 @@ más elevados?
 ggplot(data=totalData,aes(x=hours.per.week,fill=income)) + geom_histogram(binwidth =5,position="fill")
 ```
 
-Es interesante notar que para ganar de más de 50k tienes que trabajar
-más de las 40h semanales.
+Es interesante notar que para ganar más de 50k tienes que trabajar más
+de las 40h semanales, que corresponde con la jornada máxima permitida en
+Europa.
 
 #### Análisis horas a la semana respecto el sexo
 
@@ -1279,7 +1300,7 @@ Veamos los resultados al extender el mismo planteamiento del análisis de
 la variable horas semanales a la variable raza.
 
 ```{r}
-ggplot(data=totalData,aes(x=hours.per.week,fill=income)) + geom_histogram(binwidth =10,position="fill") + facet_wrap(~race) + geom_line(y = 0.25)
+ggplot(data=totalData,aes(x=hours.per.week,fill=income)) + geom_histogram(binwidth =15,position="fill") + facet_wrap(~race) + geom_line(y = 0.25)
 ```
 
 En este caso salvo las dos distribuciones minoritarias, índicos y Other,
@@ -1287,6 +1308,27 @@ el resto supera el 25% de población con ingresos superiores a los 50k
 cuando se superan las 40h semanales.
 
 ### Conclusiones finales
+
+A lo largo de este estudio realizado en EEUU, hemos visto como la
+diferentes aspectos sociales pueden determinar si una persona puede
+tener un mejor salario. Para ello se ha trazado una línea fijada en los
+50.000 \$ y después de realizar el tratamiento de los datos se ha
+procedido a comparar las diferentes variables entre ellas.
+
+Se puede destacar como una educación superior y el trabajar por encima
+de las 40 h semanales son determinantes para estar por encima del límite
+de ingresos fijados. Por otro lado, se destaca la enorme diferencia
+salarial de 1:3 de mujeres respecto a hombres. También es determinante
+el lugar de donde procedes. En efecto, hay una diferencia grande entre
+las personas cuya procedencia no es nativa norteamericana y proceden de
+asia o de otras partes del mundo. En este caso, la migración asiática
+tiene más probabilidades de estar por encima del límite de ganancia
+fijado. Eso no pasa en el caso de otras razas, salvo la blanca.
+
+En definitiva, el retrato típico que ofrece el estudio sobre el
+ciudadano norteamericano que gana por encima de los 50k, refleja a una
+**persona varón, de raza blanca, con estudios superiores y que trabaja
+más de 40 h/semanales**.
 
 ------------------------------------------------------------------------
 
