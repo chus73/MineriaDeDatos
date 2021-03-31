@@ -1005,7 +1005,7 @@ anteriormente que alguna variable los tiene ya codificados.
 
 ### **Preprocesamiento de las variables**
 
-##### Variable edad
+#### Variable edad
 
 Para la variable continua edad vamos a discretizarla por intervalos.
 
@@ -1031,7 +1031,7 @@ ingresos en la franja de 40 a 49 años. Aunque para un estudio en mayor
 profundidad sería aconsejable el calcular el porcentaje de ingresos por
 franja de edad. Este dato nos dará datos empíricos más fiables.
 
-##### Variable education
+#### Variable education
 
 En cuanto a la variable education, si examinamos los valores que toma,
 podemos ver que podemos segmentarla en tres grupos. Para ello nos
@@ -1058,7 +1058,7 @@ La segmentación la realizaremos según el siguiente criterio:
     totalData[, c('education', 'education.num', 'education_group')] %>% unique() %>% arrange(education.num) %>% print()
     ```
 
-##### Eliminación del espacio inicial en factor.
+#### Eliminación del espacio inicial en factor.
 
 En las variables tipo factor, nos encontramos que hay un espacio inicial
 que debemos de eliminar.
@@ -1078,7 +1078,7 @@ column_name_factor <- c('workclass', 'marital.status', 'occupation', 'relationsh
 
 ```
 
-##### Tratamiento de los valores desconocidos
+#### Tratamiento de los valores desconocidos
 
 En este dataset hemos observado que se utiliza el carácter "?" para los
 valores desconocidos en las variables de tipo factor. Para mejorar la
@@ -1101,7 +1101,7 @@ for (column_name in column_name_factor) {
 levels(totalData$native.country)
 ```
 
-##### Agrupación de países
+#### Agrupación de países
 
 Si examinamos la variable native.country, vemos que la proporción entre
 los de United States y el resto no se encuentra balanceada.
@@ -1131,7 +1131,7 @@ ggplot(totalData) + geom_bar(aes(x= migrant, fill= migrant))
 
 ### Procesos de análisis visuales del juego de datos
 
-#### Visualización variable workclass
+#### Análisis variable workclass
 
 Vamos a relacionar las relaciones entre clase de trabajo (workclass) e
 ingresos
@@ -1158,7 +1158,7 @@ total_workclass_ratio
 Vemos que mayor porcentaje de personas con ingresos superiores a los 50
 k se encuentra en los **empleados por cuenta propia**.
 
-#### Visualización variable education
+#### Análisis variable education
 
 Examinemos ahora las personas con estudios superiores
 
@@ -1180,7 +1180,7 @@ ggplot(data=middle_education,aes(x=education,fill=income))+geom_bar()
 Ninguna clase es representativa destacando ligeramente los que han
 acabado estudios de High scool.
 
-#### Visualización educación y país de nacimiento
+#### Análisis educación y país de nacimiento
 
 Involucremos el país de nacimiento en la estadística de la educación
 para ver los resultados
@@ -1200,7 +1200,7 @@ existen entre el número de personas que obtienen estos ingreso dentro de
 la misma clase, estudios medios respecto a superiores, para no obtener
 conclusiones erróneas.
 
-#### Visualización sexo
+#### Análisis variable sexo
 
 Primero examinemos los datos de esta variable respecto a los ingresos.
 
@@ -1222,6 +1222,8 @@ mutate(total_sex_df, ratio= (n.y / n.x)*100)
 La proporción entre los hombres que superan los 50k de ingresos respecto
 a las mujeres es de casi el triple.
 
+#### Análisis sexo respecto raza
+
 Miremos si esta relación se relaciona con la raza.
 
 ```{r}
@@ -1236,6 +1238,8 @@ su propia clase, con una población mucho menor que la blanca o la negra.
 
 Podemos preguntarnos si esto tendrá algo que ver con los estudios.
 
+#### Análisis educación respecto raza
+
 ```{r}
 totalData %>% filter(income == '>50K') %>% select('education_group', 'race') %>% table()
 ```
@@ -1244,6 +1248,43 @@ En efecto, vemos que en la población asiática, la proporción entre
 personas que obtienen estos ingresos prevalece la que tiene estudios
 superiores. Sorprende que en el caso de la población negra esto no
 sucede, siendo la que tiene estudios medios la predominante.
+
+#### Análisis horas a la semana
+
+¿Cuánto influye las horas de la semana respecto a tener unos ingresos
+más elevados?
+
+```{r}
+ggplot(data=totalData,aes(x=hours.per.week,fill=income)) + geom_histogram(binwidth =5,position="fill")
+```
+
+Es interesante notar que para ganar de más de 50k tienes que trabajar
+más de las 40h semanales.
+
+#### Análisis horas a la semana respecto el sexo
+
+Si profundizamos en la diferencia respecto al sexo
+
+```{r}
+ggplot(data=totalData,aes(x=hours.per.week,fill=income)) + geom_histogram(binwidth =10,position="fill") + facet_wrap(~sex) + geom_line(y = 0.25)
+```
+
+Hemos puesto una linea de corte en el 25% para que sea visualmente más
+impactante. En el caso de las mujeres, vemos que aunque dedique muchas
+más horas, no logran superar esta barrera.
+
+#### Análisis horas a la semana respecto la variable raza
+
+Veamos los resultados al extender el mismo planteamiento del análisis de
+la variable horas semanales a la variable raza.
+
+```{r}
+ggplot(data=totalData,aes(x=hours.per.week,fill=income)) + geom_histogram(binwidth =10,position="fill") + facet_wrap(~race) + geom_line(y = 0.25)
+```
+
+En este caso salvo las dos distribuciones minoritarias, índicos y Other,
+el resto supera el 25% de población con ingresos superiores a los 50k
+cuando se superan las 40h semanales.
 
 ### Conclusiones finales
 
