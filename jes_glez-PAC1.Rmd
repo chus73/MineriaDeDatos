@@ -445,8 +445,8 @@ de minería respecto a otros proyectos indícalo.
 >
 > ### Identificación del las fases del proyecto
 >
-> Utilizando la metodología CRISP-DM para el desarrollo de proyectos de
-> minería de datos, exploraremos las diferentes fases del proyecto a
+> Utilizando la metodología **CRISP-DM** para el desarrollo de proyectos
+> de minería de datos, exploraremos las diferentes fases del proyecto a
 > alto nivel, sin entrar a definir las tareas que surgirían dentro de
 > cada fase. Esta metodología puede ser consultada en el siguiente
 > documento: <https://www.the-modeling-agency.com/crisp-dm.pdf>, y
@@ -477,14 +477,14 @@ de minería respecto a otros proyectos indícalo.
 > muestra no es necesario contar con una alta granularidad, interesando
 > ver los flujos de circulación entre poblaciones.
 >
-> Objetivos del negocio: Tener un modelo que permita predecir los flujos
-> del transito entre poblaciones con el fin de poder planificar rutas
-> con total eficacia.
+> **Objetivos del negocio:** Tener un modelo que permita predecir los
+> flujos del transito entre poblaciones con el fin de poder planificar
+> rutas con total eficacia.
 >
-> Evaluación de la situación: Para el desarrollo del proyecto contamos
-> principalmente con los datos facilitados por las operadoras de
-> telefonía móvil, así como con la información facilitada por la DGT y
-> complementada por la agencia metereológica de españa (AEMET). En una
+> **Evaluación de la situación:** Para el desarrollo del proyecto
+> contamos principalmente con los datos facilitados por las operadoras
+> de telefonía móvil, así como con la información facilitada por la DGT
+> y complementada por la agencia metereológica de españa (AEMET). En una
 > fase posterior del proyecto y vista su viabilidad, se puede utilizar
 > la plataforma de google maps o bien streetopenview para la publicación
 > de los resultados.
@@ -496,9 +496,52 @@ de minería respecto a otros proyectos indícalo.
 > metereológicos, existe una capa de consumo sin coste que se prevee que
 > pueda dar servicio al proyecto.
 >
-> El retorno de la inversión se obtendrá de la venta del servicio a
+> El **retorno de la inversión** se obtendrá de la venta del servicio a
 > compañías de transporte. Una vez evaluado el modelo en producción se
 > pueden buscar otros nichos de negocio.
+>
+> Se considerará que el proyecto ha tenido **éxito** si:
+>
+> -   Se consigue predecir las situaciones de riesgo en la red de
+>     carreteras estatales en por encima de un 70%.
+>
+> -   El proyecto se complementa en plazos y presupuesto.
+>
+> Todo lo recogido en esta fase constituirá la base para realizar el
+> **plan del proyecto**, el cual además contará con un cronograma a alto
+> nivel, la descripción de los recursos necesarios y una descripción del
+> presupuesto estimado.
+>
+> +---+------------------------+-----------------+----------------------------------+
+> | N | Fase                   | Tiempo estimado | Entregable                       |
+> +===+========================+=================+==================================+
+> | 1 | Business Understanding | 1 semana        | Plan de proyecto                 |
+> +---+------------------------+-----------------+----------------------------------+
+> | 2 | Data Understanding     | 1 semanas       | Informe de recopilación de datos |
+> +---+------------------------+-----------------+----------------------------------+
+> | 3 | Data Preparation       | 3 semana        | modelo lógico                    |
+> +---+------------------------+-----------------+----------------------------------+
+> | 4 | Modeling               | 2 semanas       | modelo físico                    |
+> |   |                        |                 |                                  |
+> |   |                        |                 | Plan de pruebas                  |
+> +---+------------------------+-----------------+----------------------------------+
+> | 5 | Evaluation             | 1 semana        | Resultado Test                   |
+> +---+------------------------+-----------------+----------------------------------+
+> | 6 | Deployment             | 1 semana        | Documento técnico                |
+> +---+------------------------+-----------------+----------------------------------+
+>
+> La estimación de tiempos se ha realizado con un escenario optimista,
+> dejando margen para la redacción de la documentación que acompañe al
+> proyecto. En este sentido, se han definido los entregables mínimos que
+> aparecen en la tabla superior.
+>
+> Los **recursos estimados** mínimos serán la de un jefe de proyecto con
+> experiencia en analítica avanzada y un data scientist para el
+> desarrollo del modelo. La carga del equipo se balanceará y podrá ser
+> modificado en función de las exigencias del proyecto.
+>
+> Se establecen **puntos de control** mínimo con negocio en la
+> finalización de cada fase.
 >
 > ### Data Understanding
 >
@@ -580,20 +623,21 @@ de minería respecto a otros proyectos indícalo.
 > Para los datos provenientes de las operadoras de telefonía, y según
 > los ficheros de ejemplo, encontramos la siguiente estructura:
 >
-> PobxCeldasOrigen
+> -   Fichero **PobxCeldasOrigen**
 >
 > ![](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-367F390D.png)
 >
-> PobxCeldasDestino
+> -   Fichero **PobxCeldasDestino**
 >
 > ![](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-707BCC32.png)
 >
-> Flujos
+> -   Fichero **Flujos**
 >
 > ![](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-27D2FB4A.png)
 >
 > La fecha está contenida en el directorio con el siguiente formato:
-> "DIA_01ABR_2020"
+> "DIA_01ABR_2020". Por lo que se tendrá que extraer del nombre para
+> añadirlo al modelo.
 >
 > No obstante, se tendrá que trabajar con la operadora para que
 > suministren esta información mediante API.
@@ -666,12 +710,21 @@ de minería respecto a otros proyectos indícalo.
 >
 > -   **Gravedad**. Atributo "Severity".
 >
-> Como se puede comprobar, se intenta que las dimensiones sean
-> conformadas en todos los modelos con el fin de ir a un modelo único de
-> datos. Por otro lado, el resto de atributos enriquecen la tabla de
+> Como se puede comprobar, se intenta que las **dimensiones sean
+> conformadas** en todos los modelos con el fin de ir a un modelo único
+> de datos. Por otro lado, el resto de atributos enriquecen la tabla de
 > hechos con la transacción. Es especialmente interesante ver que en el
 > caso de la DGT contamos con las coordenadas geoespaciales, interesante
 > de cara a la presentación en mapa. No es así en el caso de la AEMET.
+>
+> A continuación se muestra el esquema lógico de las dimensiones
+> planteadas.
+>
+> ![](C:/Users/jesus.gonzalez/AppData/Local/RStudio/tmp/paste-99E6E422.png)
+>
+> En azul se muestran las tablas de hechos del modelo, en verde las
+> dimensiones. El reto de este proyecto será integrar el flujo del
+> transito con las incidencias en una única tabla de hechos.
 >
 > ### Modeling
 >
@@ -683,6 +736,35 @@ de minería respecto a otros proyectos indícalo.
 > necesaria el diseño de los test que se utilizarán para evaluar los
 > modelos.
 >
+> Para el proyecto que estamos realizando, nos enfrentamos a un problema
+> de clasificación, en el que en función de la historia pasada del flujo
+> de movimientos del tráfico, y alimentado con los datos presentes
+> proporcionados por las operadoras de telefonía, y de los futuros, con
+> la predicción a una semana vista de los incidentes metereológicos, se
+> realiza una clasificación a futuro de la congestión de las vías de
+> tráfico. La variable target está definida por el nivel de congestión
+> de la vía, y la establecemos en tres niveles:
+>
+> -   **Nivel 1** - Verde: Sin incidencias.
+>
+> -   **Nivel 2** - Amarillo. Con incidencias, pero sin congestión.
+>
+> -   **Nivel 3** - Rojo. Congestión.
+>
+> Se probarán con diferentes modelos de clasificación para estimar la
+> mejor bondad entre ellos, escogiendo el modelo campeón.
+>
+> -   logistic regression
+>
+> -   support vector machines
+>
+> -   random forests
+>
+> -   deep learning
+>
+> Se define una separación de la serie del 80 % para el training y el
+> 20% restante para el test.
+>
 > ### Evaluation
 >
 > Una vez obtenido los modelos necesarios para conseguir los objetivos
@@ -691,6 +773,12 @@ de minería respecto a otros proyectos indícalo.
 > el plan de test diseñado durante la fase anterior. En caso necesario
 > se revisa el proceso y en función de los resultados se determinan los
 > próximos pasos a cumplir.
+>
+> Una vez obtenido el modelo campeón, capaz de predecir por encima de
+> los objetivos iniciales del proyecto la congestión de las vías, es el
+> momento de extraer las **conclusiones** sobre los resultados
+> obtenidos. Es importante ver si el modelo **podrá ser explotado
+> comercialmente** antes de avanzar a la siguiente fase.
 >
 > ### Deployment
 >
@@ -706,10 +794,26 @@ de minería respecto a otros proyectos indícalo.
 > por ello, que CRISP-DM describe el ciclo de vida del proyecto de
 > minería de datos en en entorno circular, en donde la salida realimenta
 > la entrada de un nuevo ciclo que busca la mejora continua del negocio.
-
-<https://www.sngular.com/es/data-science-crisp-dm-metodologia/>
-
-<https://exde.wordpress.com/2009/03/13/a-visual-guide-to-crisp-dm-methodology/>
+>
+> En esta fase de despliegue se busca la optimización del modelo, siendo
+> probado en un entorno real. Por eso en esta primera fase se diseña una
+> Web rudimentaria en donde poder consultar los resultados. Se busca un
+> target de clientes selectos para que prueben durante un tiempo
+> prudencial, buscando su feed-back.
+>
+> Una vez el modelo se considere estable y listo para su explotación a
+> gran escala, se diseñará otra fase del proyecto, esta vez dirigida a
+> mejorar el look & feel del usuario. Para ello, se propone el diseño de
+> una apk en android e IOS, así como de una WEB para la explotación de
+> los datos.
+>
+> ##### Otras fuentes consultadas
+>
+> [<https://www.sngular.com/es/data-science-crisp-dm-metodologia/>](https://www.sngular.com/es/data-science-crisp-dm-metodologia/){.uri}
+>
+> [<https://exde.wordpress.com/2009/03/13/a-visual-guide-to-crisp-dm-methodology/>](https://exde.wordpress.com/2009/03/13/a-visual-guide-to-crisp-dm-methodology/){.uri}
+>
+> <http://public.dhe.ibm.com/software/analytics/spss/documentation/modeler/15.0/es/CRISP-DM.pdf>
 
 ## Ejercicio 2:
 
@@ -954,7 +1058,7 @@ La segmentación la realizaremos según el siguiente criterio:
     totalData[, c('education', 'education.num', 'education_group')] %>% unique() %>% arrange(education.num) %>% print()
     ```
 
-##### Eliminación del espacio inicial en los factor.
+##### Eliminación del espacio inicial en factor.
 
 En las variables tipo factor, nos encontramos que hay un espacio inicial
 que debemos de eliminar.
@@ -997,9 +1101,28 @@ for (column_name in column_name_factor) {
 levels(totalData$native.country)
 ```
 
-```{r}
+##### Agrupación de países
 
+Si examinamos la variable native.country, vemos que la proporción entre
+los de United States y el resto no se encuentra balanceada.
+
+```{r}
+ggplot(totalData) + geom_bar(aes(x= native.country, fill= native.country)) 
 ```
+
+Vamos a generar una nueva variable de análisis que contemple tres
+opciones, los ciudadanos norteamericanos, de otras nacionalidades y los
+desconocidos.
+
+```{r}
+totalData[totalData$native.country == 'United-States', 'migrant'] <- 'No'
+totalData[totalData$native.country == 'desconocido', 'migrant'] <- 'unknow'
+totalData[(totalData$native.country != 'United-States' & totalData$native.country!= 'desconocido'), 'migrant'] <- 'Yes'
+table(totalData$migrant)
+```
+
+Aunque ha crecido la representatividad de los ciudadanos no nacidos en
+Estados Unidos, la diferencia sigue siendo grande.
 
 ### Procesos de análisis visuales del juego de datos
 
@@ -1030,6 +1153,13 @@ ggplot(data=middle_education,aes(x=education,fill=income))+geom_bar()
 
 Ninguna clase es representativa destacando ligeramente los que han
 acabado estudios de High scool.
+
+Involucremos el país de nacimiento en la estadística de la educación
+para ver los resultados
+
+```{r}
+
+```
 
 ------------------------------------------------------------------------
 
